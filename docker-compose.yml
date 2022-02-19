@@ -1,0 +1,19 @@
+version: '3'
+
+services: 
+    apache:
+        image: httpd:2.4
+        ports:
+            - "8080:80"
+        volumes:
+            - $PWD/html/:/usr/local/apache2/htdocs/
+            - $PWD/conf/httpd.conf:/usr/local/apache2/conf/httpd.conf
+            - $PWD/conf/www-vhost.conf:/usr/local/apache2/conf/extra/www-vhost.conf
+            - $PWD/conf/www3_apex-vhost.conf:/usr/local/apache2/conf/extra/www3_apex-vhost.conf
+        restart: always
+        environment:
+            - PUBLISH_DOCROOT=/usr/local/apache2/htdocs
+            - PUBLISH_HOSTNAME_WTU_APEX=wtu.local
+            - PUBLISH_HOSTNAME_WTU=www.wtu.local
+            - PUBLISH_HOSTNAME_WTU3=www3.wtu.local
+            
