@@ -7,7 +7,6 @@ import puppeteer from 'puppeteer';
     await page.setCacheEnabled(false);
 
     const urls = [
-        'http://www.wtu.local',
         'http://www3.wtu.local',
         'http://wtu.local',
     ];
@@ -25,10 +24,7 @@ import puppeteer from 'puppeteer';
             console.log(`\t\t301 redirects in place, so the apache rewrite is enabled`);
             
         } else {
-            if (url !== urls[0]) {
-                // only urls 2 and 3 should have a redirect if the apache rewrite is enabled
-                console.log(`301 redirects not in place, so the apache rewrite is not enabled`);
-            }
+            console.log(`301 redirects not in place, so the apache rewrite is not enabled`);
         }
     }
 
