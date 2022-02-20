@@ -4,6 +4,7 @@ import puppeteer from 'puppeteer';
    
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
+    await page.setCacheEnabled(false);
 
     const urls = [
         'http://www.wtu.local',
@@ -17,9 +18,16 @@ import puppeteer from 'puppeteer';
 
         if (chain.length > 0) {
             for (const request of chain) {
-                `${request.url()} ${request.response()?.status()} to: ${
-                    request.response()?.headers()["location"]
-                  }`
+                const msg = `${request.url()} ${request.response()?.status()} to: ${
+                    request.response()?.headers()["location"]}`;
+                console.log(msg);
+            }
+            console.log(`\t\t301 redirects in place, so the apache rewrite is enabled`);
+            
+        } else {
+            if (url !== urls[0]) {
+                // only urls 2 and 3 should have a redirect if the apache rewrite is enabled
+                console.log(`301 redirects not in place, so the apache rewrite is not enabled`);
             }
         }
     }
