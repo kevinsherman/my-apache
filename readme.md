@@ -14,5 +14,5 @@
 7. With apache running, navigate to http://www.wtu.local. Observe that the background colors change from green to red to blue when you navigate across the three menu items.
 8. In VS Code, navigate to the conf directory and remove the comment at the beginning of line 7:
    `# RewriteRule ^(.*)$ http://${PUBLISH_HOSTNAME_WTU}$1 [R=301,QSA,L]`
-   Save the file and then, in terminal two, type: `apachectl -t` to validate the configurations. Then type `apachectl restart` to restart the apache server.
+   Save the file and then, in terminal two, type: `apachectl -t` to validate the configurations. Then type `apachectl -k graceful` to restart the apache server.
 9. If you now refresh your browser you will see that clicking across the three menu items keeps the body background green. If you right-click and select 'inspect' you can monitor the network traffic and see that requests to http://wtu.local/foo will HTTP 301 redirect to http://www.wtu.local/foo
